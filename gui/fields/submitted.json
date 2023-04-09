@@ -1,0 +1,4 @@
+{
+  "name": "submitted",
+  "tooltip": "This will use a user's submissions as a source\nA user must be specified with --user"
+}

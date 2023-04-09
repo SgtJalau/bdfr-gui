@@ -1,0 +1,5 @@
+{
+  "name": "search",
+  "suggestion": "e.g. cats or beach",
+  "tooltip": "This will apply the input search term to specific lists when scraping submissions\nA search term can only be applied when using the --subreddit and --multireddit flags"
+}

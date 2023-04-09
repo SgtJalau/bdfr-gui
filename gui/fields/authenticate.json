@@ -1,0 +1,4 @@
+{
+  "name": "authenticate",
+  "tooltip": "This flag will make the BDFR attempt to use an authenticated Reddit session. The BDFR uses OAuth2 authentication to connect to Reddit if authentication is required. This means that it is a secure, token-based system for making requests. This also means that the BDFR only has access to specific parts of the account authenticated, by default only saved posts, upvoted posts, and the identity of the authenticated account. Note that authentication is not required unless accessing private things like upvoted posts, saved posts, and private multireddits."
+}

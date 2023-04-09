@@ -1,0 +1,4 @@
+{
+  "name": "comment_context",
+  "tooltip": "This option will, instead of downloading an individual comment, download the submission that comment is a part of\nMay result in a longer run time as it retrieves much more data"
+}

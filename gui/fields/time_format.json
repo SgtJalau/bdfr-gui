@@ -1,0 +1,5 @@
+{
+  "name": "time_format",
+  "tooltip": "The option time_format will specify the format of the timestamp that replaces {DATE} in filename and folder name schemes.\nBy default, this is the ISO 8601 format which is highly recommended due to its standardised nature.\nIf you don't need to change it, it is recommended that you do not. However, you can specify it to anything required with this option.\nThe --time-format option supersedes any specification in the configuration file\nThe format can be specified through the format codes that are standard in the Python datetime library.",
+  "suggestion": "YYYY-MM-DD"
+}

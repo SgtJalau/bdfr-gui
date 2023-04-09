@@ -1,0 +1,4 @@
+{
+  "name": "max_score",
+  "tooltip": "This skips all submissions which have more than specified upvotes."
+}

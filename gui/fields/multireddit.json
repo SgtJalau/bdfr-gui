@@ -1,0 +1,4 @@
+{
+  "name": "multireddit",
+  "tooltip": "This is the name of a multireddit to add as a source\nCan be specified multiple times\nThis can be done by using -m multiple times\nMultireddits can also be used to provide CSV multireddits e.g. -m 'chess, favourites'\nThe specified multireddits must all belong to the user specified with the --user option"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "link",
+  "tooltip": "This is a direct link to a submission to download, either as a URL or an ID\nCan be specified multiple times",
+  "suggestion": "YYYY-MM-DD"
+}

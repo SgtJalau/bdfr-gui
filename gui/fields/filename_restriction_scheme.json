@@ -1,0 +1,4 @@
+{
+  "name": "filename_restriction_scheme",
+  "tooltip": "Can be: windows, linux\nTurns off the OS detection and specifies which system to use when making filenames. Different filesystems have different restrictions for what files and directories can be named. Thesse are separated into two broad categories: Linux-based filesystems, which have very few restrictions; and Windows-based filesystems, which are much more restrictive in terms if forbidden characters and length of paths."
+}

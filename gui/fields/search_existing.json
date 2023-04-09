@@ -1,0 +1,4 @@
+{
+  "name": "search_existing",
+  "tooltip": "This will make the BDFR compile the hashes for every file in directory\nThe hashes are used to remove duplicates if --no-dupes is supplied or make hard links if --make-hard-links is supplied\n"
+}

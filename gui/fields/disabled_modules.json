@@ -1,0 +1,4 @@
+{
+  "name": "disable_module",
+  "tooltip": "The individual modules of the BDFR, used to download submissions from websites, can be disabled. This is helpful especially in the case of the fallback downloaders, since the --skip-domain option cannot be effectively used in these cases. For example, the Youtube-DL downloader can retrieve data from hundreds of websites and domains; thus the only way to fully disable it is via the --disable-module option.\n\nModules can be disabled through the command line interface for the BDFR or more permanently in the configuration file via the disabled_modules option. The list of downloaders that can be disabled are the following. Note that they are case-insensitive.\n\n    Direct\n    DelayForReddit\n    Erome\n    Gallery (Reddit Image Galleries)\n    Gfycat\n    Imgur\n    PornHub\n    Redgifs\n    SelfPost (Reddit Text Post)\n    Vidble\n    VReddit (Reddit Video Post)\n    Youtube\n    YoutubeDlFallback\n"
+}

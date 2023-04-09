@@ -1,0 +1,4 @@
+{
+  "name": "log",
+  "tooltip": "This allows one to specify the location of the logfile\nThis must be done when running multiple instances of the BDFR"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "skip_domain",
+  "tooltip": "This adds domains to the download filter i.e. submissions coming from these domains will not be downloaded\nCan be specified multiple times\nDomains must be supplied in the form example.com or img.example.com\n"
+}

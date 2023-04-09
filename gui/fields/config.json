@@ -1,0 +1,4 @@
+{
+  "name": "config",
+  "tooltip": "If the path to a configuration file is supplied with this option, the BDFR will use the specified config"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "max_score_ratio",
+  "tooltip": "This skips all submissions which have higher than specified upvote ratio. For example, if you set it to 0.5, it will skip all submissions with more than 50% upvotes."
+}

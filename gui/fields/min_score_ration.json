@@ -1,0 +1,4 @@
+{
+  "name": "min_score_ratio",
+  "tooltip": "This skips all submissions which have lower than specified upvote ratio. For example, if you set it to 0.5, it will skip all submissions which have less than 50% upvotes."
+}

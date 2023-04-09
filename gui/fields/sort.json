@@ -1,0 +1,4 @@
+{
+  "name": "sort",
+  "tooltip": "This is the sort type for each applicable submission source supplied to the BDFR\nThis option does not apply to upvoted or saved posts when scraping from these sources"
+}

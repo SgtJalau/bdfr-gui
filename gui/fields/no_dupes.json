@@ -1,0 +1,4 @@
+{
+  "name": "no_dupes",
+  "tooltip": "This flag will not redownload files if they were already downloaded in the current run\nThis is calculated by MD5 hash"
+}

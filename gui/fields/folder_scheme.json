@@ -1,0 +1,4 @@
+{
+  "name": "folder_scheme",
+  "tooltip": "Same as file scheme. However it does not need to contain a key and can be purely static. An example of this is 'images' which will be resolved to one single folder called 'images' inside your specified download directory. If you used 'images_{SUBREDDIT}' it would create a folder per subreddit inside the images folder. A resulting path would be:\n\nimages_funny\nimages_explainlikeimfive"
+}

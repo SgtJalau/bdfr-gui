@@ -1,0 +1,4 @@
+{
+  "name": "verbose",
+  "tooltip": "Increases the verbosity of the program\nCan be specified multiple times"
+}

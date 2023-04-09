@@ -1,0 +1,4 @@
+{
+  "name": "exclude_id_file",
+  "tooltip": "This will skip the download of any submission with the ID provided\nCan be specified multiple times\n"
+}

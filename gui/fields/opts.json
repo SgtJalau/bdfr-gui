@@ -1,0 +1,4 @@
+{
+  "name": "opts",
+  "tooltip": "Load options from a YAML file.\nHas higher prority than the global config file but lower than command-line arguments."
+}

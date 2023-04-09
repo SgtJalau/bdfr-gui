@@ -1,0 +1,4 @@
+{
+  "name": "upvoted",
+  "tooltip": "This will use a user's upvoted posts as a source of posts to scrape\nThis requires an authenticated Reddit instance, using the --authenticate flag, as well as --user set to me\n"
+}

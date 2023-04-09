@@ -1,0 +1,5 @@
+{
+  "name": "directory",
+  "tooltip": "This is the directory to which the BDFR will download and place all files",
+  "suggestion": "/home/username/directory"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "min_score",
+  "tooltip": "This skips all submissions which have fewer than specified upvotes."
+}

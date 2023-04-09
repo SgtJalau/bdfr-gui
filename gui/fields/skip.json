@@ -1,0 +1,4 @@
+{
+  "name": "skip",
+  "tooltip": "This adds file types to the download filter i.e. submissions with one of the supplied file extensions will not be downloaded\nCan be specified multiple times\n"
+}

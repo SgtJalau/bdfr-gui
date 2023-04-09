@@ -1,0 +1,4 @@
+{
+  "name": "limit",
+  "tooltip": "This is the limit on the number of submissions retrieve\nDefault is max possible\nNote that this limit applies to each source individually e.g. if a --limit of 10 and three subreddits are provided, then 30 total submissions will be scraped\nIf it is not supplied, then the BDFR will default to the maximum allowed by Reddit, roughly 1000 posts. We cannot bypass this.\n"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "saved",
+  "tooltip": "This option will make the BDFR use the supplied user's saved posts list as a download source\n    This requires an authenticated Reddit instance, using the --authenticate flag, as well as --user set to me\n"
+}

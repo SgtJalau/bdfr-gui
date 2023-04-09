@@ -1,0 +1,4 @@
+{
+  "name": "all_comments",
+  "tooltip": "When combined with the --user option, this will download all the user's comments"
+}

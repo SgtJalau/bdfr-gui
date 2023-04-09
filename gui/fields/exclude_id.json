@@ -1,0 +1,4 @@
+{
+  "name": "exclude_id",
+  "tooltip": "This will skip the download of any submission with the ID provided."
+}

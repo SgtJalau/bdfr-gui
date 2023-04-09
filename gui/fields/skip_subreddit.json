@@ -1,0 +1,4 @@
+{
+  "name": "skip_subreddit",
+  "tooltip": "This skips all submissions from the specified subreddit\nCan be specified multiple times\nAlso accepts CSV subreddit names\n"
+}

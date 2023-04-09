@@ -1,0 +1,4 @@
+{
+  "name": "user",
+  "tooltip": "This specifies the user to scrape in concert with other options\nWhen using --authenticate, --user me can be used to refer to the authenticated user\nCan be specified multiple times for multiple users\nIf downloading a multireddit, only one user can be specified"
+}
