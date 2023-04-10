@@ -3,14 +3,16 @@ import os
 import tkinter as tk
 from dataclasses import fields
 from enum import Enum
+from tkinter import messagebox
 from typing import List
 
 import tkinter_utils
-import type_utils
-from tooltip import create_tooltip
-from input_configuration import InputConfiguration, SortType, TimeFilter, serialize_input_configuration, \
-    DownloaderConfiguration, ArchiverConfiguration
+from bdfrg import type_utils
+from bdfrg.input_configuration import InputConfiguration, serialize_input_configuration
+from bdfrg.reddit import reddit_utils
+from bdfrg.reddit.reddit_utils import RedditUrlType
 from default_entry import DefaultEntry
+from tooltip import create_tooltip
 
 current_directory_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -104,8 +106,10 @@ class ConfigurationGUI(tk.Frame):
         super().__init__(master)
         self.master = master
         self.input_configuration = input_configuration
+        # Stores the field variables by field_var name (e.g PYVAR1 -> VariableWrapper)
         self.variables: dict = {}
         self.serialized_config = None
+        self.popup = None
 
         self.grid()
         self.columnconfigure(0, weight=1)
@@ -118,7 +122,6 @@ class ConfigurationGUI(tk.Frame):
         # Set padding left and right
         self.grid(padx=10)
 
-
         # Create widgets
 
         self.create_widgets()
@@ -130,6 +133,11 @@ class ConfigurationGUI(tk.Frame):
         :return: The widget with the given name.
         """
         return self.nametowidget(widget_name)
+
+    def get_variable_for_configuration_field(self, field_name: str) -> VariableWrapper:
+        for pyvar, variable_wrapper in self.variables.items():
+            if variable_wrapper.field_name == field_name:
+                return variable_wrapper
 
     # We need this intermediate function because the validate command only passes through strings, not the actual field type
     def validate_integer(self, new_text: str, old_text: str, widget_name: str) -> bool:
@@ -200,7 +208,6 @@ class ConfigurationGUI(tk.Frame):
 
         return grid
 
-
     def create_widgets(self):
         grid = self.create_grid_section('Input Configuration', 0)
 
@@ -227,6 +234,79 @@ class ConfigurationGUI(tk.Frame):
         serialized_config.config(height=10, width=50)
         serialized_config.grid(row=5, column=0, columnspan=4, sticky=tk.N + tk.S + tk.E + tk.W)
         serialized_config.insert(tk.END, serialize_input_configuration(self.input_configuration))
+
+        # Bottom padding before toolbar
+        self.rowconfigure(6, pad=10)
+
+        add_button = tk.Button(self, text="+", fg="green", command=self.on_add_link_press)
+        # Font size for +
+        add_button.config(font=('Arial', 20))
+        add_button.grid(row=6, column=0, sticky=tk.W)
+
+    def on_add_link_press(self):
+        self.popup = tk.Toplevel()
+        self.popup.title("Add URL")
+
+        url_label = tk.Label(self.popup, text="URL:")
+        url_label.pack(side=tk.LEFT)
+
+        url_entry = tk.Entry(self.popup)
+        url_entry.pack(side=tk.LEFT)
+
+        add_button = tk.Button(self.popup, text="Add", command=lambda: self.on_input_url(url_entry.get()))
+        add_button.pack(side=tk.LEFT)
+
+    def close_add_url_popup(self):
+        # Close popup
+        self.popup.destroy()
+        self.popup.update()
+
+    def on_input_url(self, url):
+        # Do something with the link
+        print(f"URL added: {url}")
+
+        try:
+            url_type = reddit_utils.get_reddit_type_from_url(url)
+            self.add_url(url, url_type)
+            self.close_add_url_popup()
+        except Exception as e:
+            messagebox.showerror("Error", e)
+
+    def add_url(self, url: str, url_type: RedditUrlType):
+        try:
+            identifying_part = reddit_utils.get_identifying_part_of_reddit_url(url, url_type)
+
+            if url_type is RedditUrlType.SUBREDDIT:
+                # Append identifying part to widget
+                variable_wrapper: VariableWrapper = self.get_variable_for_configuration_field('subreddit')
+            elif url_type is RedditUrlType.MULTIREDDIT:
+                # Append identifying part to widget
+                variable_wrapper: VariableWrapper = self.get_variable_for_configuration_field('multireddit')
+            elif url_type is RedditUrlType.USER:
+                # Append identifying part to widget
+                variable_wrapper: VariableWrapper = self.get_variable_for_configuration_field('user')
+            elif url_type is RedditUrlType.POST or url_type is RedditUrlType.COMMENT:
+                # Append identifying part to widget
+                variable_wrapper: VariableWrapper = self.get_variable_for_configuration_field('link')
+            else:
+                raise Exception('Unsupported URL')
+
+            to_insert = identifying_part
+
+            var_val = variable_wrapper.variable.get()
+
+            # If empty, no new line at the start, but otherwise if we aren't in a blank new line append new line before new link
+            # None because the var is 'None' if initialized by None python type
+            if len(var_val) != 0 and var_val != 'None' and not var_val.endswith('\n'):
+                to_insert = '\n' + to_insert
+
+            # Add new row to the widget (tk.Text or tk.Entry)
+            variable_wrapper.widget.insert(tk.END, to_insert)
+            variable_wrapper.variable.set(identifying_part)
+
+            self.update_serialized_command_preview()
+        except Exception as e:
+            messagebox.showerror("Error", e)
 
 
     def create_widgets_for_class(self, parent, instance, start_row, start_column):
@@ -298,7 +378,8 @@ class ConfigurationGUI(tk.Frame):
             # Check if field name is in value_suggestions
             if field_name in field_formatting and 'suggestion' in field_formatting[field_name]:
                 # Create a text box with a default value
-                field_widget = DefaultEntry(parent, textvariable=field_var, default_text=field_formatting[field_name]['suggestion'])
+                field_widget = DefaultEntry(parent, textvariable=field_var,
+                                            default_text=field_formatting[field_name]['suggestion'])
             else:
                 # Create a text box
                 field_widget = tk.Entry(parent, textvariable=field_var)
@@ -387,7 +468,13 @@ class ConfigurationGUI(tk.Frame):
 
         # Set the field to the new value
         setattr(configuration, field, value)
+        self.update_serialized_command_preview()
 
+    def update_serialized_command_preview(self):
+        """
+        Updates the serialized command preview widget with the current text
+        :return: None
+        """
         # Update the serialized configuration (delete and reinsert)
         self.serialized_config.delete(1.0, tk.END)
         self.serialized_config.insert(tk.END, serialize_input_configuration(self.input_configuration))
@@ -395,5 +482,9 @@ class ConfigurationGUI(tk.Frame):
 
 # Create an open gui
 root = tk.Tk()
+# Set name of window
+root.title('Bulk Downloader For Reddit GUI')
+
+
 app = ConfigurationGUI(master=root)
 app.mainloop()

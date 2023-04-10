@@ -43,3 +43,22 @@ def split_line(line: str, max_characters_per_line: int) -> []:
     lines.extend(split_line(line[split_index + 1:], max_characters_per_line))
 
     return lines
+
+def get_substring_from_string(string: str, start: str, end: str) -> str:
+    """
+    Get a substring from a string between two strings. Example: get_substring_from_string('abc123def', 'abc', 'def') -> '123'
+    :param string: The string to get the substring from
+    :param start: The start string
+    :param end: The end string
+    :return: The substring
+    """
+    start_index = string.find(start)
+
+    # Check if end is found after start
+    if end in string[start_index:]:
+        end_index = string.find(end, start_index + len(start))
+    else:
+        # End not found after start, return the rest of the string
+        end_index = len(string)
+
+    return string[start_index + len(start):end_index]
